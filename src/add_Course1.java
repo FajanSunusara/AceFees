@@ -1,0 +1,531 @@
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author HP
+ */
+public class add_Course1 extends javax.swing.JFrame {
+
+    /**
+     * Creates new form ViewAllRecord
+     */
+    public add_Course1() {
+        initComponents();
+        fillTable();
+    }
+      public void fillTable()    
+     {
+     try
+     {
+         Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+         Connection conn =DriverManager.getConnection("jdbc:derby://localhost:1527/login","root","root");
+         PreparedStatement pst = conn.prepareStatement("select * from COURSE1");
+         ResultSet rs = pst.executeQuery();
+         while(rs.next())
+         {  
+             String id =String.valueOf(rs.getString("ID"));
+             String name =rs.getString("CNAME");
+             String cost =rs.getString("COT");
+             //String course =rs.getString("COURSE_NAME");
+             //String TotalAmount =rs.getString("TOTAL_AMOUNT");
+             //String remaining =rs.getString("REMARK");
+             //String remark =rs.getString("REMIANING");
+              //String category =rs.getString("CCATEGORY");
+             
+             
+             String Tdata[]={id,name,cost};
+             DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
+                   model.addRow(Tdata);
+             
+         }
+     
+     
+     
+     }
+     
+     catch(Exception e)
+     {
+         e.printStackTrace();
+     }
+ }
+      
+      public void AddTable(int id,String Cname,String Price)
+    {
+        try
+     {
+         Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+         Connection conn =DriverManager.getConnection("jdbc:derby://localhost:1527/login","root","root");
+         PreparedStatement pst = conn.prepareStatement("Insert into COURSE1 values(?,?,?);");
+        pst.setInt(1, id);
+        pst.setString(2,Cname );
+        pst.setString(3, Price);
+        int rowCount =pst.executeUpdate();
+        if(rowCount == 1)
+        {
+            JOptionPane.showMessageDialog(this," course  Added Successfully"); 
+            clearTable();
+            fillTable();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this," course  Added Unsuccessfull");
+        }
+         
+     
+     
+     }
+     
+     catch(Exception e)
+     {
+         e.printStackTrace();
+     }
+        
+        
+        
+    }
+    
+    public void UpdateTable(int id,String Dname,String Price)
+    {
+     try
+     {
+         Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+         Connection conn =DriverManager.getConnection("jdbc:derby://localhost:1527/login","root","root");
+         PreparedStatement pst = conn.prepareStatement("update course1 set cname =?, cot= ? where id = ?");
+        
+        pst.setString(1, Dname);
+        pst.setString(2, Price);
+        pst.setInt(3, id);
+        int rowCount =pst.executeUpdate();
+        
+        if(rowCount == 1)
+        {
+            JOptionPane.showMessageDialog(this," course  Updated Successfully"); 
+            clearTable();
+            fillTable();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this," course Update Unsuccessfull");
+        }
+         
+     
+     
+     }
+     
+     catch(Exception e)
+     {
+         e.printStackTrace();
+     }
+        
+    }
+    
+      public void DeleteTable(int id)
+    {
+     try
+     {
+         Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+         Connection conn =DriverManager.getConnection("jdbc:derby://localhost:1527/login","root","root");
+         PreparedStatement pst = conn.prepareStatement("delete from course1 where id = ?");
+        
+        
+        pst.setInt(1, id);
+        int rowCount =pst.executeUpdate();
+        
+        if(rowCount == 1)
+        {
+            JOptionPane.showMessageDialog(this," Course Deleted Successfully"); 
+            clearTable();
+            fillTable();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this," Dish deletion Unsuccessfull");
+        }
+         
+     
+     
+     }
+     
+     catch(Exception e)
+     {
+         e.printStackTrace();
+     }
+        
+    }
+    
+      
+public void clearTable()
+      {
+         DefaultTableModel model =(DefaultTableModel)jTable2.getModel();
+         model.setRowCount(0);
+      }
+      
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel13 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
+        pnl_sidebar = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel13.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel13MouseClicked(evt);
+            }
+        });
+        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Name", "Cost"
+            }
+        ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setMaxWidth(50);
+            jTable2.getColumnModel().getColumn(1).setMaxWidth(500);
+            jTable2.getColumnModel().getColumn(2).setMaxWidth(200);
+        }
+
+        jPanel13.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 750, 520));
+        jPanel13.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 290, 20));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("View course");
+        jPanel13.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 250, 40));
+
+        getContentPane().add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 710));
+
+        pnl_sidebar.setBackground(new java.awt.Color(0, 102, 102));
+        pnl_sidebar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/logout.png"))); // NOI18N
+        jLabel1.setText("Logout");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, -1, -1));
+
+        jPanel4.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/home.png"))); // NOI18N
+        jLabel4.setText("Home");
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, -1, -1));
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 330, 70));
+
+        pnl_sidebar.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 590, 330, 70));
+
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel2MouseClicked(evt);
+            }
+        });
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/home.png"))); // NOI18N
+        jLabel2.setText("Home");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, -1, -1));
+
+        pnl_sidebar.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 330, 70));
+
+        jPanel3.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/search2.png"))); // NOI18N
+        jLabel3.setText("Search Record");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, -1));
+
+        pnl_sidebar.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 330, 70));
+
+        jPanel5.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/edit2.png"))); // NOI18N
+        jLabel5.setText("Edit Course");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, -1, -1));
+
+        jPanel6.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/home.png"))); // NOI18N
+        jLabel6.setText("Home");
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, -1, -1));
+
+        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 330, 70));
+
+        pnl_sidebar.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 330, 70));
+
+        jPanel9.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/view all record.png"))); // NOI18N
+        jLabel9.setText("View Record");
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
+        jPanel9.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, -1, -1));
+
+        jPanel10.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/home.png"))); // NOI18N
+        jLabel10.setText("Home");
+        jPanel10.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, -1, -1));
+
+        jPanel9.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 330, 70));
+
+        pnl_sidebar.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 330, 70));
+
+        jPanel11.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel11MouseClicked(evt);
+            }
+        });
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/left-arrow.png"))); // NOI18N
+        jLabel11.setText("Back");
+        jPanel11.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, -1));
+
+        jPanel12.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel12.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/home.png"))); // NOI18N
+        jLabel12.setText("Home");
+        jPanel12.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, -1, -1));
+
+        jPanel11.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 330, 70));
+
+        pnl_sidebar.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, 330, 70));
+
+        getContentPane().add(pnl_sidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 0, 420, 1020));
+
+        setSize(new java.awt.Dimension(1401, 744));
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+                    // TODO add your handling code here:
+    }//GEN-LAST:event_jTable2MouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        this.setVisible(false);   // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        this.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1MouseClicked
+
+    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+        Home_page a = new Home_page();
+        a.setVisible(true);
+        this.setVisible(false); // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel2MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        SearchRecord sr =new SearchRecord();
+        sr.setVisible(true);
+        this.setVisible(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        add_Course ac =new add_Course();
+        ac.setVisible(true);
+        this.setVisible(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        ViewAllRecord vr = new  ViewAllRecord();
+        vr.setVisible(true);
+        this.setVisible(false);// TODO add your handling code here: AR
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jPanel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseClicked
+        Home_page a = new Home_page();
+        a.setVisible(true);
+        this.setVisible(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel11MouseClicked
+
+    private void jPanel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel13MouseClicked
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(add_Course .class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(add_Course .class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(add_Course .class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(add_Course .class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new add_Course ().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JPanel pnl_sidebar;
+    // End of variables declaration//GEN-END:variables
+}
